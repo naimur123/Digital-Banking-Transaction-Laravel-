@@ -10,12 +10,12 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
   
 <body>
-
-	<h1>@yield('head')</h1><br>
-	<div class="container">
-	<ul class="nav nav-pills">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+	<ul class="navbar-nav ml-auto" >
 	<li class="nav-item">
 	     @yield('navbar')
     </li>
@@ -25,17 +25,21 @@
 	<div class="dropdown-menu">
 	       @yield('dropdown')
 	</div>
+	</li>
 	<li class="nav-item">
 	     @yield('logout')
     </li>
-	</li>
+
+	
 	</ul>
-	</div>
+	</nav>
 
 	<div id="main-content">
 		@yield('content')
 	</div>
 	<br>
+    
+
 	
 	<div id="main-content">
 		@yield('search')

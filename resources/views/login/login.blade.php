@@ -27,7 +27,7 @@
 			</tr>
 		</table>
 		</fieldset>
-		<a href="/app/fblogin">Facebook Login</a>
+		<a href="/app/facebook">Facebook Login</a>
 
 		<h3 style="color: red">
 			{{session('msg')}}

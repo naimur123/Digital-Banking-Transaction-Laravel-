@@ -18,10 +18,6 @@
   <input type="text" class="form-control" id="usr" name="name" value="{{$name}}">
 </div>
   <div class="form-group">
-	<label for="usrnm">User Name:</label>
-	<input type="text" class="form-control" id="usrnm" name="username" value="{{$username}}" required>
-  </div>
-  <div class="form-group">
 	<label for="email">Email:</label>
 	<input type="email" class="form-control" id="email" name="email" value="{{$email}}">
   </div>

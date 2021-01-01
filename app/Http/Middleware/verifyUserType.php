@@ -18,7 +18,7 @@ class verifyUserType
         if($request->session()->get('type') == "admin"){
     		return $next($request);
     	}else{
-    		return redirect('/home');
+    		return redirect('/app/login');
     	}
     }
 }

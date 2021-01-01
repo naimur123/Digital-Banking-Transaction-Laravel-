@@ -1,13 +1,16 @@
 @extends('layout/navbar')
 
-@section('head')
-	Welcome home
-@endsection
 
 @section('content')
-	
-	Name: {{$name}}
-	
+<div class="card" style="width: 18rem;" padding-left="20%">
+  <div class="card-body">
+    <h5 class="card-title">Profile</h5>
+    <p class="card-text">Name: {{$name}}</p>
+  
+    <a href="/app/adminedit" class="btn btn-primary">Edit Profile</a>
+  </div>
+</div>
+
 @endsection
 
 @section('title')

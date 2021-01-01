@@ -2,7 +2,7 @@
 @section('createadmin')
 <body>
 	<div class="container">
-
+	<a href="{{route('admin.home.home')}}">Home</a>
 	<div class="form-group">
 	<form method="post" enctype="multipart/form-data">
 

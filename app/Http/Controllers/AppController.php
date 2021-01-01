@@ -6,6 +6,7 @@ use App\app;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
 use App\Http\Requests\PasswordRequest;
+use Illuminate\Support\Facades\Http;
 use Validator;
 use App\User;
 
@@ -16,7 +17,9 @@ class AppController extends Controller
     {
         
         $name = $req->session()->get('username');
-        return view('admin.home.home',compact('name'));
+        
+        $users = app::where('username', $name)->get('id');
+        return view('admin.home.home',compact('name','users'));
     }
     public function adminlist(){
         $useradmin ="admin";
@@ -113,7 +116,6 @@ class AppController extends Controller
     {
         $user = app::find($id); 
         $user->name         = $req->name;
-        $user->username     = $req->username;
         $user->email        = $req->email;
         $user->contactno    = $req->contactno;
         $user->address      = $req->address;
@@ -253,5 +255,43 @@ class AppController extends Controller
         $mpdf->Output($filename,'I');
         
      }
+     public function salarylist(){
+       
+        $client = new \GuzzleHttp\Client();
+        $response = $client->request('GET', 'http://localhost:3000/adminhome/salarylist');
+        echo $response->getBody();
+         
+    }
+    public function transaction(){
+       
+        $client = new \GuzzleHttp\Client();
+        $response = $client->request('GET', 'http://localhost:3000/adminhome/transaction');
+        echo $response->getBody();
+         
+    }
+  
+    public function adminedit(Request $req)
+    {
+        $id= $req->session()->get('id');
+        /*$users = app::select('id')->where('username', $name)->get();
+                 
+        if(count((array)$users) > 0){
+            $user = app::find($users);       
+           
+        }*/
+        return $id;
+       
+       
+       
+       
+    }
+    public function updateadmin()
+    {
+        
+
+        
+    }
+
+
 
 }
