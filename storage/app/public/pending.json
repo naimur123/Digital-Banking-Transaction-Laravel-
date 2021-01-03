@@ -1,0 +1,6 @@
+HTTP/1.0 200 OK
+Cache-Control: no-cache, private
+Content-Type:  application/json
+Date:          Sat, 02 Jan 2021 21:23:13 GMT
+
+{"name":"Safiqur","username":"naimur123","email":"66sagar@gmail.com","contactno":"+88 01111111111","nid":"123-46-789","gender":"Male","address":"Dhaka","usertype":"agent","password":"12345"}

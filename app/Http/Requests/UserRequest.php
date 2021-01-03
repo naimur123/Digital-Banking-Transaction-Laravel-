@@ -27,7 +27,7 @@ class UserRequest extends FormRequest
             
             'name' => 'required|min:3',
             'type' => 'required',
-            'username' => 'required|unique:user,username,'.$this->id
+            'username' => 'required|unique:users,username,'.$this->id
         ];
     }
 

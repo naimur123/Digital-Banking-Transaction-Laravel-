@@ -9,6 +9,8 @@ use App\Http\Requests\PasswordRequest;
 use Illuminate\Support\Facades\Http;
 use Validator;
 use App\User;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Response;
 
 class AppController extends Controller
 {
@@ -17,9 +19,11 @@ class AppController extends Controller
     {
         
         $name = $req->session()->get('username');
+        $id = $req->session()->get('id');
         
-        $users = app::where('username', $name)->get('id');
-        return view('admin.home.home',compact('name','users'));
+        $user=  app::where('id','LIKE','%'.$id."%")
+                ->get();
+       return view('admin.home.home')->with('user', $user);
     }
     public function adminlist(){
         $useradmin ="admin";
@@ -47,6 +51,10 @@ class AppController extends Controller
    
     public function store(UserRequest $request)
     {
+        if($request->hasFile('myimg')){
+        $file = $request->file('myimg');
+        if($file->move('upload', $file->getClientOriginalName())){
+
         $user = new app();
         $user->name         = $request->name;
         $user->username     = $request->username;
@@ -57,9 +65,9 @@ class AppController extends Controller
         $user->address      = $request->address;
         $user->usertype     = $request->type;
         $user->password     = $request->password;
+        $user->profile_img  = $file->getClientOriginalName();
        
-        
-        if($user->usertype =="admin")
+     if($user->usertype =="admin")
         {
         if($user->save()){
             return redirect()->route('admin.home.adminlist');
@@ -70,6 +78,9 @@ class AppController extends Controller
     else{
         return back();
     }
+}
+    
+}
     }
     public function createmanager()
     {
@@ -102,6 +113,28 @@ class AppController extends Controller
     else{
         return back();
     }
+    }
+    public function createagent()
+    {
+        return view('admin.home.createagent');
+    }
+    public function storeagent(Request $request)
+    {
+        $form_data = array(
+            'name'     => $request->name,
+            'username' => $request->username,
+            'email'    => $request->email,
+            'contactno'=> $request->contactno,
+            'nid'      => $request->nid,
+            'gender'   => $request->gender,
+            'address'  => $request->address,
+            'usertype' => $request->type,
+            'password' => $request->password
+        );
+        // Storage::disk('public')->put('pending.json', response()->json($form_data));
+         return $form_data;
+        
+        
     }
 
    
@@ -138,6 +171,45 @@ class AppController extends Controller
             return redirect()->route('admin.home.userlist');
         }
 
+        
+    }
+    public function adminedit(Request $req)
+    {
+        $id= $req->session()->get('id');
+        $value = app::find($id);
+        return view('admin.home.adminedit', $value);
+
+    }
+    public function updateadmin(PasswordRequest $req)
+    {
+        if($req->hasFile('myimg'))
+        {
+        $file = $req->file('myimg');
+        if($file->move('upload', $file->getClientOriginalName()))
+        {
+
+        $id= $req->session()->get('id');
+        $user = app::find($id); 
+        $user->name         = $req->name;
+        $user->email        = $req->email;
+        $user->contactno    = $req->contactno;
+        $user->address      = $req->address;
+        $user->password     = $req->cpassword;
+        $user->usertype     = $req->type;
+        $user->profile_img  = $file->getClientOriginalName();
+
+      
+        
+        if($user->usertype =="admin")
+        {
+            $user->save();
+            return redirect()->route('admin.home.home');
+        }
+      
+    }
+    }
+
+       
         
     }
 
@@ -270,27 +342,8 @@ class AppController extends Controller
          
     }
   
-    public function adminedit(Request $req)
-    {
-        $id= $req->session()->get('id');
-        /*$users = app::select('id')->where('username', $name)->get();
-                 
-        if(count((array)$users) > 0){
-            $user = app::find($users);       
-           
-        }*/
-        return $id;
-       
-       
-       
-       
-    }
-    public function updateadmin()
-    {
-        
-
-        
-    }
+   
+   
 
 
 

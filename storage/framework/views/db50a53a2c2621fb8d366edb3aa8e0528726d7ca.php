@@ -1,0 +1,1 @@
+<?php /**PATH H:\ATP-3\Final\project\resources\views/admin/home/seepending.blade.php ENDPATH**/ ?>

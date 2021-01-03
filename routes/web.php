@@ -37,6 +37,9 @@ Route::group(['middleware'=>['sess']], function(){
 	Route::get('/app/createmanager', 'AppController@createmanager')->name('admin.home.createmanager');
 	Route::post('/app/createmanager', 'AppController@storemanager');
 
+	Route::get('/app/createagent', 'AppController@createagent')->name('admin.home.createagent');
+	Route::post('/app/createagent', 'AppController@storeagent');
+
 	Route::get('/app/users', 'AppController@index2');
 	Route::get('/app/search','AppController@search')->name('search');
 
@@ -55,5 +58,9 @@ Route::group(['middleware'=>['sess']], function(){
 
 	Route::get('/app/adminedit', 'AppController@adminedit')->name('admin.home.adminedit');
 	Route::post('/app/adminedit', 'AppController@updateadmin');
+
+	
+
+	
 });
 Route::resource('/app','AppController');

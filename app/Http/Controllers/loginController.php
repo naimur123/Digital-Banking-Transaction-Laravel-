@@ -17,13 +17,17 @@ class loginController extends Controller
         $user = DB::table('users')
                     ->where('username', $req->username)
                     ->where('password', $req->password)
-					->first();
+                    ->first();
+       
 
-    	if(count((array)$user) > 0){
+    	if($user != NULL){
           
     		$req->session()->put('username', $req->username);
-            $req->session()->put('usertype', $req->type);
-            $req->session()->put('id', $user['id']);
+            $req->session()->put('usertype', $user->usertype);
+            $req->session()->put('id', $user->id);
+         
+           
+          
            
             
     		return redirect()->route('admin.home.home');
